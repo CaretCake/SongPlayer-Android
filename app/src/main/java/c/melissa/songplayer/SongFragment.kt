@@ -4,13 +4,12 @@
     image display and playing of the actual song is handled here.
  */
 
-package c.melissa.jokesfragmented
+package c.melissa.songplayer
 
 import android.content.Context
 import android.os.*
 import android.support.v4.app.*
 import android.view.*
-import android.widget.*
 import java.util.*
 
 class SongFragment : Fragment() {

@@ -2,7 +2,7 @@
     This class handles the songs and their corresponding link. Each is given a UUID as well.
  */
 
-package c.melissa.jokesfragmented
+package c.melissa.songplayer
 
 import java.util.UUID
 

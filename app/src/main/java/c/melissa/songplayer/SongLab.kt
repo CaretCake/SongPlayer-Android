@@ -5,7 +5,7 @@
     corresponding URL, then store that as a Song in the list.
  */
 
-package c.melissa.jokesfragmented
+package c.melissa.songplayer
 
 import android.content.Context
 

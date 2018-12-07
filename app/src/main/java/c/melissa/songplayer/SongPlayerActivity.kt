@@ -7,7 +7,7 @@
     continue to play until finished or the user chooses another song from the list.
  */
 
-package c.melissa.jokesfragmented
+package c.melissa.songplayer
 
 import android.content.*
 import android.support.v4.app.*

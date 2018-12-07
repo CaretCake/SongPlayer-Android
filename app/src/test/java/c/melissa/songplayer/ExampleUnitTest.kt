@@ -1,4 +1,4 @@
-package c.melissa.jokesfragmented
+package c.melissa.songplayer
 
 import org.junit.Test
 

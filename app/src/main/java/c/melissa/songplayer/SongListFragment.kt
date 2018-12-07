@@ -4,7 +4,7 @@
     the fragments as scrolling occurs.
  */
 
-package c.melissa.jokesfragmented
+package c.melissa.songplayer
 
 import android.content.Context
 import android.os.Bundle
