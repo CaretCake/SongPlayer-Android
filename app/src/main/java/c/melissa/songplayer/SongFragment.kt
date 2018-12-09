@@ -7,18 +7,17 @@
 package c.melissa.songplayer
 
 import android.content.Context
-import android.media.MediaPlayer
 import android.os.*
 import android.support.v4.app.*
 import android.view.*
-import java.io.File
-import java.io.FileInputStream
+import android.widget.TextView
 import java.util.*
 import java.util.concurrent.TimeUnit
 
 class SongFragment : Fragment() {
     private var mSong: Song? = null
     internal var DONE: Boolean = false
+    lateinit var songNameTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +30,8 @@ class SongFragment : Fragment() {
 
         // TODO: Create and set up view when clicking on a song in list, play music here
 
+        songNameTextView = view.findViewById(R.id.song_name) as TextView
+        songNameTextView.text = mSong!!.songName
 
         return view
     }
