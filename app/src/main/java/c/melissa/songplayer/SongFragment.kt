@@ -7,13 +7,19 @@
 package c.melissa.songplayer
 
 import android.content.Context
+import android.media.MediaPlayer
 import android.os.*
 import android.support.v4.app.*
 import android.view.*
+import java.io.File
+import java.io.FileInputStream
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 class SongFragment : Fragment() {
     private var mSong: Song? = null
+    internal var DONE: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val songID = arguments!!.getSerializable(ARG_SONG_ID) as UUID
@@ -25,7 +31,43 @@ class SongFragment : Fragment() {
 
         // TODO: Create and set up view when clicking on a song in list, play music here
 
+
         return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+        println("http://philos.nmu.edu"+mSong!!.songLink+".mp3")
+        DONE = false
+        try {
+            val mp = MediaPlayer()
+            /*val filePath = "http:/"+"/philos.nmu.edu"+mSong!!.songLink+".mp3"
+            val file = File(filePath)
+            val inputStream = FileInputStream(file)
+            mp.setDataSource(inputStream.getFD())*/
+            mp.setDataSource("http://philos.nmu.edu"+mSong!!.songLink+".mp3")
+            mp.prepare()
+            mp.start()
+            mp.start()
+            try {
+                TimeUnit.SECONDS.sleep(10)
+            } catch (e: Exception) {
+
+            }
+
+            mp.pause()
+            try {
+                TimeUnit.SECONDS.sleep(5)
+            } catch (e: Exception) {
+
+            }
+
+            mp.start()
+        } catch (e: Exception) {
+            println("Tough")
+            e.printStackTrace()
+        }
+
     }
 
     companion object {
