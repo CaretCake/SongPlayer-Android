@@ -14,7 +14,7 @@ import android.support.v4.app.*
 import java.util.*
 
 
-class SongPlayerActivity : SingleFragmentActivity() {
+class MainActivity : SingleFragmentActivity() {
 
     override fun createFragment(): Fragment {
         val songId = intent.getSerializableExtra(EXTRA_SONG_ID) as UUID
@@ -26,7 +26,7 @@ class SongPlayerActivity : SingleFragmentActivity() {
         private val EXTRA_SONG_ID = "c.melissa.fragment1.song_id"
 
         fun newIntent(packageContext: Context, songId: UUID): Intent {
-            val intent = Intent(packageContext, SongPlayerActivity::class.java)
+            val intent = Intent(packageContext, MainActivity::class.java)
             intent.putExtra(EXTRA_SONG_ID, songId)
             return intent
         }

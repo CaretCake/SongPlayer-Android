@@ -49,7 +49,7 @@ class SongLab private constructor(context: Context) {
         parseUrls()
 
 
-        // TODO: change to get list from website content
+        // TO DO: change to get list from website content
 
         for (song in urlSongMap.keys) {
             val newSong = Song()
@@ -92,7 +92,7 @@ class SongLab private constructor(context: Context) {
         private val exception: Exception? = null
 
         override fun doInBackground(vararg urls: Void): Void? {
-            val context = getContext() as Context
+            //val context = getContext() as Context
             println("About to begin")
             try {
                 val obj = URL("http://philos.nmu.edu/weirdal/")
@@ -102,8 +102,8 @@ class SongLab private constructor(context: Context) {
                 val responseCode = con.responseCode
                 println("GET Response Code :: $responseCode")
                 if (responseCode == HttpURLConnection.HTTP_OK) { // success
-                    var `in` = BufferedReader(InputStreamReader(con.inputStream))
-                    val tmpdir = context.cacheDir.toString()
+                    var website = BufferedReader(InputStreamReader(con.inputStream))
+                    /*val tmpdir = context.cacheDir.toString()
                     val out = PrintWriter("$tmpdir/license.txt")
                     while (true) {
                         val c = `in`.read()
@@ -112,15 +112,15 @@ class SongLab private constructor(context: Context) {
                     }
                     `in`.close()
 
-                    out.close()
-                    `in` = BufferedReader(InputStreamReader(FileInputStream("$tmpdir/license.txt")))
+                    out.close()*/
+                    //`in` = BufferedReader(InputStreamReader(FileInputStream("$tmpdir/license.txt")))
                     while (true) {
-                        val c = `in`.read()
+                        val c = website.read()
                         if (c == -1) break
                         print(c.toChar())
                         htmlText += c.toChar()
                     }
-                    `in`.close()
+                    website.close()
 
                 } else {
                     println("GET request not worked")

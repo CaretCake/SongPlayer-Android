@@ -48,19 +48,21 @@ class SongListFragment : Fragment() {
 
     private inner class SongHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         private var mSong: Song? = null
-        private lateinit var mSongNameTextView: TextView
+        lateinit var mSongNameTextView: TextView
 
         init {
             itemView.setOnClickListener(this)
+            mSongNameTextView = itemView.findViewById(R.id.list_item_song_name_text_view) as TextView
+
         }
 
-        internal fun bindJokeCat(song: Song) {
+        internal fun bindSong(song: Song) {
             mSong = song
             mSongNameTextView.text = mSong!!.songName
         }
 
         override fun onClick(v: View) {
-            val intent = SongPlayerActivity.newIntent(getContext() as Context, mSong!!.id)
+            val intent = MainActivity.newIntent(getContext() as Context, mSong!!.id)
             startActivity(intent)
         }
     }
@@ -79,7 +81,7 @@ class SongListFragment : Fragment() {
 
         override fun onBindViewHolder(holder: SongHolder, position: Int) {
             val song = mSongs[position]
-            holder.bindJokeCat(song)
+            holder.bindSong(song)
         }
 
         override fun getItemCount(): Int {
