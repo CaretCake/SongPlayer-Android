@@ -48,7 +48,7 @@ class SongListFragment : Fragment() {
 
     private inner class SongHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         private var mSong: Song? = null
-        lateinit var mSongNameTextView: TextView
+        var mSongNameTextView: TextView
 
         init {
             itemView.setOnClickListener(this)
