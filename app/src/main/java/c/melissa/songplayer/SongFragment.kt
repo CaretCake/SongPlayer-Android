@@ -37,14 +37,10 @@ class SongFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        println("http://philos.nmu.edu"+mSong!!.songLink+".mp3")
+        //println("http://philos.nmu.edu"+mSong!!.songLink+".mp3")
         DONE = false
         try {
-            val mp = MediaPlayer()
-            /*val filePath = "http:/"+"/philos.nmu.edu"+mSong!!.songLink+".mp3"
-            val file = File(filePath)
-            val inputStream = FileInputStream(file)
-            mp.setDataSource(inputStream.getFD())*/
+            mp.reset()
             mp.setDataSource("http://philos.nmu.edu"+mSong!!.songLink+".mp3")
             mp.prepare()
             mp.start()
@@ -64,7 +60,6 @@ class SongFragment : Fragment() {
 
             mp.start()
         } catch (e: Exception) {
-            println("Tough")
             e.printStackTrace()
         }
 

@@ -14,6 +14,7 @@ import android.media.MediaPlayer
 import android.support.v4.app.*
 import java.util.*
 
+val mp = MediaPlayer()
 
 class MainActivity : SingleFragmentActivity() {
 
