@@ -7,17 +7,24 @@
 package c.melissa.songplayer
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.os.*
 import android.support.v4.app.*
 import android.view.*
 import android.widget.TextView
 import java.util.*
 import java.util.concurrent.TimeUnit
+import android.graphics.BitmapFactory
+import android.os.AsyncTask
+import android.util.Log
+import android.widget.ImageView
+
 
 class SongFragment : Fragment() {
     private var mSong: Song? = null
     internal var DONE: Boolean = false
     lateinit var songNameTextView: TextView
+    lateinit var songImageView: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,17 +35,21 @@ class SongFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_song, container, false)
 
-        // TODO: Create and set up view when clicking on a song in list, play music here
-
         songNameTextView = view.findViewById(R.id.song_name) as TextView
+        songImageView = view.findViewById(R.id.song_image) as ImageView
         songNameTextView.text = mSong!!.songName
+
+        DownloadImageTask(songImageView).execute("http://philos.nmu.edu"+mSong!!.songLink+".jpg")
+
 
         return view
     }
 
+    /*
+        Starts playing the selected song by pulling from given url.
+     */
     override fun onResume() {
         super.onResume()
-        //println("http://philos.nmu.edu"+mSong!!.songLink+".mp3")
         DONE = false
         try {
             mp.reset()
@@ -76,6 +87,30 @@ class SongFragment : Fragment() {
             val fragment = SongFragment()
             fragment.arguments = args
             return fragment
+        }
+    }
+
+    /*
+        Downloads the song's associated image from the given url.
+     */
+    private inner class DownloadImageTask(internal var bmImage: ImageView) : AsyncTask<String, Void, Bitmap>() {
+
+        override fun doInBackground(vararg urls: String): Bitmap? {
+            val urldisplay = urls[0]
+            var mIcon11: Bitmap? = null
+            try {
+                val `in` = java.net.URL(urldisplay).openStream()
+                mIcon11 = BitmapFactory.decodeStream(`in`)
+            } catch (e: Exception) {
+                Log.e("Error", e.message)
+                e.printStackTrace()
+            }
+
+            return mIcon11
+        }
+
+        override fun onPostExecute(result: Bitmap) {
+            bmImage.setImageBitmap(result)
         }
     }
 }

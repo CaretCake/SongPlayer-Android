@@ -43,7 +43,6 @@ class SongLab private constructor(context: Context) {
         webthread = false
         RetrieveFeedTask().execute(null as Void?)
         while (!webthread);
-        println("Wow!  What a great website!")
 
         parseUrls()
 
@@ -66,7 +65,10 @@ class SongLab private constructor(context: Context) {
         }
     }
 
-
+    /*
+        Parses the HTML into the name and url (minus the .filetype) for each song on the page and
+        stores it into a map of song name -> url.
+     */
     fun parseUrls () {
         val regexPattern = Regex("<A HREF=\"(\\/(\\d|\\w|\\/|%)*)\\..{3}\">((\\s|\\d|\\w)*)\\.(.{3})<\\/A>")
         val foundMatches = regexPattern.findAll(htmlText)
@@ -78,6 +80,9 @@ class SongLab private constructor(context: Context) {
         }
     }
 
+    /*
+        Gets the HTML from the given page.
+     */
     internal inner class RetrieveFeedTask : AsyncTask<Void, Void, Void>() {
 
         private val exception: Exception? = null
@@ -100,7 +105,7 @@ class SongLab private constructor(context: Context) {
                     website.close()
 
                 } else {
-                    println("GET request not worked")
+                    println("GET request failed")
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
